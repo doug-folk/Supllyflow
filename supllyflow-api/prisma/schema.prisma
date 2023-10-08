@@ -10,7 +10,18 @@
 
 
 
+model Supplier {
+  id       String    @id @default(uuid())
+  name     String
+  contact     String
+  description String
+   category    String
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String
+  products Product[]
 
+  @@map("suppliers")
+}
 model Product {
   id         String   @id @default(uuid())
   name       String
