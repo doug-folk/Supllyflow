@@ -1,5 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  password  String
 
+  fantasyName     String
+  reasonSocial    String
+  cnpj            String
+  responsibleName String
+  fieldOfActivity String
+
+  city         String
+  uf           String
+  road         String
+  neighborhood String
+  number       String
+
+  product   Product[]
+  suppliers Supplier[]
+}
+utj-qotn-api
 
 
 

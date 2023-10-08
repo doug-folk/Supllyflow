@@ -13,3 +13,18 @@ services:
 
 networks:
   supllyflow-net:
+api:
+    image: supllyflow-api:0.1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run dev
+    ports:
+      - 3333:3333
+    environment:
+      - DATABASE_URL=postgresql://postgres:123@192.168.143.13:5434/supllyflow?schema=public
+    networks:
+      - supllyflow-net
+  
+networks:
+  supllyflow-net:
