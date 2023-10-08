@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import backgroundImg from "../../assets/background-login.png";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo2.png";
 import { styles } from "./style";
 import ButtonPrimary from "../../components/buttonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary";
@@ -39,6 +39,10 @@ export function Login() {
       style={styles.background}
       defaultSource={backgroundImg}
     >
+
+      <View style={ styles.logoContainer} >
+        <Image source={logo} />
+      </View>
       <View style={styles.container}>
         <Text style={styles.title}>Entrar</Text>
         <Text style={styles.subtitle}>Seja bem vindo!</Text>

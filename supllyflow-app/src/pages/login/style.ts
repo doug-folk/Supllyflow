@@ -3,13 +3,17 @@ import { THEME } from '../../theme/theme';
 
 export const styles = StyleSheet.create({
     background: {
-    flex: 1,
+        flex: 1,
         backgroundColor: THEME.COLORS.BACKGROUND_800,
         alignItems: 'center',
         justifyContent: 'center'
     },
     container: {
         width: '80%',
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 40
     },
     title: {
         color: THEME.COLORS.PRIMARY,
@@ -30,11 +34,10 @@ export const styles = StyleSheet.create({
         height: 48,
         borderRadius: 8,
         paddingLeft: 20,
-        marginBottom: 20,
+        marginTop: 20,
         fontWeight: '500'
     },
-    forgotPasswordBtn: {
-         
+    forgotPasswordBtn: { 
         color: THEME.COLORS.PRIMARY,
         fontWeight: '600',
         fontSize: 16
