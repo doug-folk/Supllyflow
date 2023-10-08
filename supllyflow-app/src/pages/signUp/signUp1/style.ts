@@ -3,12 +3,16 @@ import { THEME } from '../../../theme/theme';
 
 export const styles = StyleSheet.create({
     background: {
-    flex: 1,
-        backgroundColor: THEME.COLORS.BACKGROUND_800,
+        flex: 1,
+        backgroundColor: '#fff',
+    },
+    page: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1,
     },
     container: {
+        marginTop: '20%',
         width: '80%',
     },
     title: {
@@ -30,11 +34,10 @@ export const styles = StyleSheet.create({
         height: 48,
         borderRadius: 8,
         paddingLeft: 20,
-        marginBottom: 20,
+        marginTop: 20,
         fontWeight: '500'
     },
     forgotPasswordBtn: {
-         
         color: THEME.COLORS.PRIMARY,
         fontWeight: '600',
         fontSize: 16
