@@ -15,7 +15,7 @@ model Supplier {
   name     String
   contact     String
   description String
-   category    String
+  category    String
   user     User      @relation(fields: [userId], references: [id])
   userId   String
   products Product[]
@@ -27,8 +27,8 @@ model Product {
   name       String
   user       User     @relation(fields: [userId], references: [id])
   userId     String
-   description String
-   bar_code    String   @unique
+  description String
+  bar_code    String   @unique
   amount      Int
   category    String
   supplier   Supplier @relation(fields: [supplierId], references: [id])
