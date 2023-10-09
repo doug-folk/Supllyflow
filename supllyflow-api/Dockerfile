@@ -1,12 +1,12 @@
 FROM node:alpine
 
-WORKDIR /app
+WORKDIR /api
 
-COPY package*.json ./
+COPY ./supllyflow-api/package*.json ./
 
-COPY prisma ./prisma
+COPY supllyflow-api/prisma ./prisma
 
-COPY src ./src
+COPY supllyflow-api/src ./src
 
 RUN npm install
 

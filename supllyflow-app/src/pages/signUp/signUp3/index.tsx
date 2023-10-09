@@ -1,16 +1,13 @@
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  ScrollView,
-} from "react-native";
-import { Controller, useForm } from 'react-hook-form';
-import { styles } from './style';
-import ButtonSecondary from '../../../components/buttonSecondary';
-import ButtonPrimary from '../../../components/buttonPrimary';
-import { FormDataSignUp2 } from '../signUp2';
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import React, { useState } from "react";
+import { View, Text, TextInput, ScrollView, ActivityIndicator } from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import { styles } from "./style";
+import ButtonSecondary from "../../../components/buttonSecondary";
+import ButtonPrimary from "../../../components/buttonPrimary";
+import { FormDataSignUp2 } from "../signUp2";
+import axios from "axios";
+import { THEME } from "../../../theme/theme";
 
 export interface FormDataSignUp3 {
   responsibleName: string;
@@ -36,6 +33,8 @@ export function SignUp3() {
   const paramsData = route.params as FormDataSignUp2;
   console.log(paramsData);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigation = useNavigation();
 
   const {
@@ -45,8 +44,9 @@ export function SignUp3() {
   } = useForm<FormDataSignUp3>();
 
   function onSubmit(data: FormDataSignUp3) {
-    const formData2 : FormDataSignUp3 = {
-       responsibleName: paramsData.responsibleName,
+    setIsLoading(true);
+    const formData =  {
+      responsibleName: paramsData.responsibleName,
       fantasyName: paramsData.fantasyName,
       reasonSocial: paramsData.reasonSocial,
       cnpj: paramsData.cnpj,
@@ -59,15 +59,24 @@ export function SignUp3() {
       number: paramsData.number,
       email: data.email,
       password: data.password,
-      cPassword: data.cPassword
-    }
-    navigation.navigate("welcome" as never);
+    };
+
+    axios
+      .post("http://192.168.143.13:3333/user", formData)
+      .then((response) => {
+        console.log(response.data);
+        navigation.navigate("welcome" as never);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   }
 
   function prevPage() {
     navigation.goBack();
   }
-    
+
   return (
     <ScrollView style={styles.background}>
       <View style={styles.page}>
@@ -88,22 +97,20 @@ export function SignUp3() {
             rules={{ required: "Email é obrigatório" }}
           />
           {errors.email && (
-            <Text style={{ color: "red" }}>
-              {errors.email.message}
-            </Text>
+            <Text style={{ color: "red" }}>{errors.email.message}</Text>
           )}
-
 
           <Controller
             control={control}
             name="password"
             render={({ field: { onChange, onBlur, value } }) => (
-             <TextInput
+              <TextInput
                 placeholder="Senha"
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
                 style={styles.input}
+                secureTextEntry
               />
             )}
             rules={{ required: "A senha é obrigatório" }}
@@ -119,6 +126,7 @@ export function SignUp3() {
               <TextInput
                 placeholder="Confirme a Senha"
                 onChangeText={onChange}
+                secureTextEntry
                 onBlur={onBlur}
                 value={value}
                 style={styles.input}
@@ -127,21 +135,17 @@ export function SignUp3() {
             rules={{ required: "Cofirme a senha" }}
           />
           {errors.cPassword && (
-            <Text style={{ color: "red" }}>
-              {errors.cPassword.message}
-            </Text>
-          )
-          }
+            <Text style={{ color: "red" }}>{errors.cPassword.message}</Text>
+          )}
 
           <ButtonPrimary title="Cadastrar" onPress={handleSubmit(onSubmit)} />
 
-          <ButtonSecondary
-            title="Voltar"
-            onPress={prevPage}
-          />
+          <ButtonSecondary title="Voltar" onPress={prevPage} />
         </View>
+         {isLoading && (
+          <ActivityIndicator size="large" color={THEME.COLORS.PRIMARY} />
+        )}
       </View>
     </ScrollView>
   );
-
 }

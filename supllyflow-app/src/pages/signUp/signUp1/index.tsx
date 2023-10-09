@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TextInput, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { styles } from "./style";
@@ -8,11 +8,11 @@ import { useNavigation } from "@react-navigation/native";
 import { TextInputMask } from "react-native-masked-text";
 
 export interface FormDataUser {
-  nomeResponsavel: string;
-  nomeFantasia: string;
-  razaoSocial: string;
+  responsibleName: string;
+  fantasyName: string;
+  reasonSocial: string;
   cnpj: string;
-  ramoAtividade: string;
+  fieldOfActivity: string;
 }
 
 type Navigation = {
@@ -32,6 +32,10 @@ export function SignUp1() {
     navigation.navigate("SignUp2", data);
   }
 
+  function prevPage() {
+    navigation.goBack();
+  }
+
   return (
     <ScrollView style={styles.background}>
       <View style={styles.page}>
@@ -44,7 +48,7 @@ export function SignUp1() {
 
           <Controller
             control={control}
-            name="nomeResponsavel"
+            name="responsibleName"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 placeholder="Nome do responsável"
@@ -56,9 +60,9 @@ export function SignUp1() {
             )}
             rules={{ required: "O nome do responsável é obrigatório" }}
           />
-          {errors.nomeResponsavel && (
+          {errors.responsibleName && (
             <Text style={{ color: "red" }}>
-              {errors.nomeResponsavel.message}
+              {errors.responsibleName.message}
             </Text>
           )}
 
@@ -73,16 +77,16 @@ export function SignUp1() {
                 value={value}
               />
             )}
-            name="nomeFantasia"
+            name="fantasyName"
             rules={{ required: "O nome fantasia é obrigatório" }}
           />
-          {errors.nomeFantasia && (
-            <Text style={{ color: "red" }}>{errors.nomeFantasia.message}</Text>
+          {errors.fantasyName && (
+            <Text style={{ color: "red" }}>{errors.fantasyName.message}</Text>
           )}
 
           <Controller
             control={control}
-            name="razaoSocial"
+            name="reasonSocial"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 placeholder="Razão Social"
@@ -94,8 +98,8 @@ export function SignUp1() {
             )}
             rules={{ required: "A razão social é obrigatória" }}
           />
-          {errors.razaoSocial && (
-            <Text style={{ color: "red" }}>{errors.razaoSocial.message}</Text>
+          {errors.reasonSocial && (
+            <Text style={{ color: "red" }}>{errors.reasonSocial.message}</Text>
           )}
 
           <Controller
@@ -119,7 +123,7 @@ export function SignUp1() {
 
           <Controller
             control={control}
-            name="ramoAtividade"
+            name="fieldOfActivity"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 placeholder="Ramo de Atividade"
@@ -131,15 +135,15 @@ export function SignUp1() {
             )}
             rules={{ required: "O ramo de atividade é obrigatório" }}
           />
-          {errors.ramoAtividade && (
-            <Text style={{ color: "red" }}>{errors.ramoAtividade.message}</Text>
+          {errors.fieldOfActivity && (
+            <Text style={{ color: "red" }}>{errors.fieldOfActivity.message}</Text>
           )}
 
           <ButtonPrimary title="Próximo" onPress={handleSubmit(onSubmit)} />
 
           <ButtonSecondary
             title="Já possui uma conta?"
-            onPress={handleSubmit(onSubmit)}
+            onPress={prevPage}
           />
         </View>
       </View>
