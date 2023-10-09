@@ -17,12 +17,12 @@ export const styles = StyleSheet.create({
     },
     title: {
         color: THEME.COLORS.PRIMARY,
-        fontSize: 40,
+        fontSize: 36,
         fontWeight: 'bold',
         textAlign: 'center',
     },
     subtitle: {
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
         marginTop: 10,
         marginBottom: 20
