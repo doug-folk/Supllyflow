@@ -34,12 +34,13 @@ export const styles = StyleSheet.create({
         height: 48,
         borderRadius: 8,
         paddingLeft: 20,
-        marginTop: 20,
+        marginTop: 25,
         fontWeight: '500'
     },
     forgotPasswordBtn: { 
         color: THEME.COLORS.PRIMARY,
-        fontWeight: '600',
+        fontWeight: '800',
+        marginTop: 10,
         fontSize: 16
     },
 })
