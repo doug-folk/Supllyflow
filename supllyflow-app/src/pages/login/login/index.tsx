@@ -68,7 +68,7 @@ export function Login() {
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              placeholder="Digite sua senha"
+              placeholder="Senha"
               onChangeText={onChange}
               style={styles.input}
               onBlur={onBlur}
@@ -89,7 +89,7 @@ export function Login() {
 
         <ButtonPrimary title="Entrar" onPress={handleSubmit(onSubmit)} />
 
-       <ButtonSecondary title="Criar nova conta" onPress={function () {
+       <ButtonSecondary title="Criar nova conta" onPress={() => {
           navigation.navigate('signUp1' as never);
         } } />
       </View>
