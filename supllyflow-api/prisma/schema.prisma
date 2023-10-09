@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  password  String
+
+  fantasyName     String
+  reasonSocial    String
+  cnpj            String
+  responsibleName String
+  fieldOfActivity String
+
+  city         String
+  uf           String
+  road         String
+  neighborhood String
+  number       String
+
+  product   Product[]
+  suppliers Supplier[]
+}
+utj-qotn-api
+
+
+
+
+
+
+
+
+
+
+model Supplier {
+  id       String    @id @default(uuid())
+  name     String
+  contact     String
+  description String
+  category    String
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String
+  products Product[]
+
+  @@map("suppliers")
+}
+model Product {
+  id         String   @id @default(uuid())
+  name       String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  description String
+  bar_code    String   @unique
+  amount      Int
+  category    String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  supplierId String
+
+  @@map("products")
+}
