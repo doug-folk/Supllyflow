@@ -6,7 +6,7 @@ import { getToken } from "../utils/token";
 
 export class ProductController{
     async create(req: Request, res: Response) {
-        const { name, supplierId }: ProductModel = req.body;
+        const { name, supplierId, description, bar_code,amount, category }: ProductModel = req.body;
         
         const userId = getToken(req, res);
 
