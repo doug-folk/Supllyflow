@@ -62,7 +62,7 @@ export function SignUp3() {
     };
 
     axios
-      .post("http://192.168.143.13:30001/user", formData)
+      .post("http://192.168.143.13:3333/user", formData)
       .then((response) => {
         console.log(response.data);
         navigation.navigate("welcome" as never);
