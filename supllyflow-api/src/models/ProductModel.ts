@@ -1,10 +1,10 @@
 export type ProductModel = {
     id: string
     name: string;
-    description: String;
-    bar_code:    String;
-    amount:     String;
-    category:    String;
-    supplierId: String;
+    description: string;
+    bar_code:    string;
+    amount:     string;
+    category:    string;
+    supplierId: string;
 
 }
