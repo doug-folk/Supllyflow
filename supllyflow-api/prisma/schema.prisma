@@ -48,10 +48,10 @@ model Product {
   name       String
   user       User     @relation(fields: [userId], references: [id])
   userId     String
-  // description String
-  // bar_code    String   @unique
-  // amount      Int
-  // category    String
+  description String
+  bar_code    String   @unique
+  amount      Int
+  category    String
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   supplierId String
 
