@@ -14,6 +14,7 @@ import { styles } from "./style";
 import ButtonPrimary from "../../components/buttonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 interface FormData {
   email: string;
@@ -28,7 +29,20 @@ export function Login() {
   } = useForm<FormData>();
 
   function onSubmit(data: FormData) {
-    console.log(data);
+    const formData =  {
+      email: data.email,
+      password: data.password,
+    };
+
+    axios
+      .post("http://192.168.143.13:3333/auth", formData)
+      .then((response) => {
+        console.log(response.data);
+        navigation.navigate("bottomNavigationBar" as never);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
    const navigation = useNavigation();
@@ -68,7 +82,7 @@ export function Login() {
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              placeholder="Digite sua senha"
+              placeholder="Senha"
               onChangeText={onChange}
               style={styles.input}
               onBlur={onBlur}
@@ -89,7 +103,7 @@ export function Login() {
 
         <ButtonPrimary title="Entrar" onPress={handleSubmit(onSubmit)} />
 
-       <ButtonSecondary title="Criar nova conta" onPress={function () {
+       <ButtonSecondary title="Criar nova conta" onPress={() => {
           navigation.navigate('signUp1' as never);
         } } />
       </View>
