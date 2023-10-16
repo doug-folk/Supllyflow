@@ -14,7 +14,11 @@ export class ProductController{
             data: {
                 name,
                 supplierId,
-                userId
+                userId,
+                description,
+                bar_code,
+                amount,
+                category
             }
         })
 
