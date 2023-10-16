@@ -3,7 +3,7 @@ export type ProductModel = {
     name: string;
     description: string;
     bar_code:    string;
-    amount:     string;
+    amount:     number;
     category:    string;
     supplierId: string;
 
