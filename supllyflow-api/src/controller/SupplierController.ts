@@ -11,7 +11,10 @@ export class SupplierController{
         const supplier =  await prisma.supplier.create({
             data: {
                 name,
-                userId: userId
+                userId: userId,
+                contact,
+                description,
+                category,
             }
         })
 
