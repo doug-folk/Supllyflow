@@ -16,7 +16,6 @@ declare global {
     }
 }
 
-
 export function AuthMiddleware(
     req: Request,
     res: Response,
