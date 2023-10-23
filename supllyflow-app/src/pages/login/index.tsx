@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  Image
+  Image,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import backgroundImg from "../../assets/background-login.png";
@@ -14,6 +14,8 @@ import { styles } from "./style";
 import ButtonPrimary from "../../components/buttonPrimary";
 import ButtonSecondary from "../../components/buttonSecondary";
 import { useNavigation } from "@react-navigation/native";
+import { api } from "../../services";
+import { Snackbar } from "react-native-paper";
 
 interface FormData {
   email: string;
@@ -21,6 +23,8 @@ interface FormData {
 }
 
 export function Login() {
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -28,10 +32,25 @@ export function Login() {
   } = useForm<FormData>();
 
   function onSubmit(data: FormData) {
-    console.log(data);
+    const formData = {
+      email: data.email,
+      password: data.password,
+    };
+
+    api
+      .post("/auth", formData)
+      .then((response) => {
+        console.log(response.data);
+        navigation.navigate("bottomNavigationBar" as never);
+      })
+      .catch((error) => {
+        setPasswordIncorrect(true);
+        console.error(error);
+        // Toast.show({ type: "error", text1: 'errada' });
+      });
   }
 
-   const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <ImageBackground
@@ -39,8 +58,7 @@ export function Login() {
       style={styles.background}
       defaultSource={backgroundImg}
     >
-
-      <View style={ styles.logoContainer} >
+      <View style={styles.logoContainer}>
         <Image source={logo} />
       </View>
       <View style={styles.container}>
@@ -89,9 +107,19 @@ export function Login() {
 
         <ButtonPrimary title="Entrar" onPress={handleSubmit(onSubmit)} />
 
-       <ButtonSecondary title="Criar nova conta" onPress={() => {
-          navigation.navigate('signUp1' as never);
-        } } />
+        <ButtonSecondary
+          title="Criar nova conta"
+          onPress={() => {
+            navigation.navigate("signUp1" as never);
+          }}
+        />
+        <Snackbar
+          visible={passwordIncorrect}
+          style={{ marginTop: 100 }}
+          onDismiss={() => setPasswordIncorrect(false)}
+        >
+          Senha incorreta, tente novamente!
+        </Snackbar>
       </View>
     </ImageBackground>
   );
