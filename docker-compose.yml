@@ -20,7 +20,7 @@ services:
     ports:
       - 3333:3333
     environment:
-      - DATABASE_URL=postgresql://postgres:123@192.168.143.13:5434/supllyflow?schema=public
+      - DATABASE_URL=postgresql://postgres:123@192.168.143.15:5434/supllyflow?schema=public
     networks:
       - supllyflow-net
 

@@ -4,7 +4,6 @@ export type UserModel = {
   fantasyName: string;
   reasonSocial: string;
   responsibleName: string;
-  fieldOfActivity: string;
   city: string;
   uf: string;
   road: string;
