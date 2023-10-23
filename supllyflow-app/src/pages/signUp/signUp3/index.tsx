@@ -8,6 +8,7 @@ import ButtonPrimary from "../../../components/buttonPrimary";
 import { FormDataSignUp2 } from "../signUp2";
 import axios from "axios";
 import { THEME } from "../../../theme/theme";
+import { api } from "../../../services";
 
 export interface FormDataSignUp3 {
   responsibleName: string;
@@ -61,8 +62,7 @@ export function SignUp3() {
       password: data.password,
     };
 
-    axios
-      .post("http://192.168.143.13:3333/user", formData)
+    api.post('/user', formData)
       .then((response) => {
         console.log(response.data);
         navigation.navigate("welcome" as never);

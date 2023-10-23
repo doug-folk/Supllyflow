@@ -17,7 +17,8 @@ export class AuthController{
         const isValuePassword = await compare(password, user.password); 
 
         if (!isValuePassword) {
-            return res.json({error: "password invalid"})
+            return res.status(401).json({ error: "password invalid" });
+
         }
 
         const token = sign({ id: user.id }, "secret", { expiresIn: "7d" });
