@@ -1,8 +1,8 @@
 export type SupplierModel = {
-    id: string;
+  id: string;
   name: string;
-  contact: string;
-  description: string;
-  category: string;
-  userId: string;
+  reasonSocial: string;
+  telephone: string;
+  email: string;
+  cnpj: string;
 }
