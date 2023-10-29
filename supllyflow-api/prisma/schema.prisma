@@ -18,7 +18,6 @@ model User {
   reasonSocial    String
   cnpj            String
   responsibleName String
-  fieldOfActivity String
 
   city         String
   uf           String
@@ -31,29 +30,30 @@ model User {
 }
 
 model Supplier {
-  id       String    @id @default(uuid())
-  name     String
-  contact     String
-  description String
-  category    String
-  user     User      @relation(fields: [userId], references: [id])
-  userId   String
-  products Product[]
+  id           String    @id @default(uuid())
+  name         String
+  reasonSocial String
+  telephone    String
+  email        String
+  cnpj         String
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String
+  products     Product[]
 
   @@map("suppliers")
 }
 
 model Product {
-  id         String   @id @default(uuid())
-  name       String
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String
+  id          String   @id @default(uuid())
+  name        String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
   description String
   bar_code    String   @unique
   amount      Int
   category    String
-  supplier   Supplier @relation(fields: [supplierId], references: [id])
-  supplierId String
+  supplier    Supplier @relation(fields: [supplierId], references: [id])
+  supplierId  String
 
   @@map("products")
 }

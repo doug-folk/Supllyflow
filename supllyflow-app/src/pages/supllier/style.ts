@@ -1,43 +1,89 @@
 import { StyleSheet } from "react-native";
 import { THEME } from "../../theme/theme";
 
-export const modalStyles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
+export const styles = StyleSheet.create({
+  body: {
+    paddingTop: 40,
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalContent: {
-    width: 300,
-    height: 600,
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    elevation: 5,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 10,
+    height: "100%",
   },
   title: {
-    color: THEME.COLORS.PRIMARY,
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: "center"
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-  input: {
-    backgroundColor: THEME.COLORS.BACKGROUND_800,
-    color: THEME.COLORS.TEXT,
-    fontSize: 18,
-    height: 48,
-    borderRadius: 8,
-    paddingLeft: 20,
-    marginTop: 25,
+  subtitleRow: {
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    width: "90%",
+    marginBottom: 30,
+  },
+  subtitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  circleValue: {
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: THEME.COLORS.GREEN, 
+    marginTop: 40,
+    marginBottom: 40,
+  },
+  circleValueText: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: THEME.COLORS.GREEN,
+  },
+
+  supllier: {
+    width: "90%",
+    height: 60,
+  },
+  supllierRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  supllierRowLeft: {
+    flexDirection: "row",
+    gap: 15,
+  },
+  circle: {
+    width: 15,
+    height: 15,
+    backgroundColor: THEME.COLORS.GREEN,
+    borderRadius: 25,
+  },
+  line: {
+    borderBottomColor: "#E8E8E8",
+    borderBottomWidth: 1,
+    marginTop: 15,
+  },
+  supllierName: {
     fontWeight: "500",
+    fontSize: 18,
+  },
+  supllierValue: {
+    fontSize: 16,
+  },
+  floatingButton: {
+    position: "absolute",
+    bottom: 20,
+    right: 10,
+    backgroundColor: THEME.COLORS.PRIMARY,
+    borderRadius: 50,
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
   },
 });

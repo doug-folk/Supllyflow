@@ -1,4 +1,5 @@
-import React = require("react");
+
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 
 export function Dashboard() {

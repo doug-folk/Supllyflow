@@ -24,6 +24,3 @@ router.get("/supplier", AuthMiddleware, supplierController.findSuppliersUser);
 
 router.post("/product", AuthMiddleware, productController.create);
 router.get("/product", AuthMiddleware, productController.findProductUser);
-
-// rota protegida de exemplo 
-router.get("/users", AuthMiddleware, userController.index);
