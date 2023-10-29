@@ -30,14 +30,15 @@ model User {
 }
 
 model Supplier {
-  id          String    @id @default(uuid())
-  name        String
-  contact     String
-  description String
-  category    String
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  products    Product[]
+  id           String    @id @default(uuid())
+  name         String
+  reasonSocial String
+  telephone    String
+  email        String
+  cnpj         String
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String
+  products     Product[]
 
   @@map("suppliers")
 }
