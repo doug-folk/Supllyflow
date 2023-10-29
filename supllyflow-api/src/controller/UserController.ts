@@ -2,6 +2,7 @@ import { hash } from "bcryptjs";
 import prisma from "../utils/prisma";
 import { Request, Response } from "express";
 import {UserModel} from "../models/UserModel";
+import { sign } from "jsonwebtoken";
 export class UserController {
   async index(req: Request, res: Response) {
     const users = await prisma.user.findMany();
@@ -15,7 +16,6 @@ export class UserController {
       fantasyName,
       reasonSocial,
       responsibleName,
-      fieldOfActivity,
       city,
       uf,
       road,
@@ -39,7 +39,6 @@ export class UserController {
         fantasyName,
         reasonSocial,
         responsibleName,
-        fieldOfActivity,
         city,
         uf,
         cnpj,
@@ -49,6 +48,12 @@ export class UserController {
       },
     });
 
-    return res.json({ user });
+    const token = sign({ id: user.id }, "secret", { expiresIn: "7d" });
+
+    return res.json({ 
+        id: user.id,
+        email,
+        token
+     });
   }
 }
