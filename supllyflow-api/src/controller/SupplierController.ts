@@ -7,14 +7,15 @@ export class SupplierController{
     async create(req: Request, res: Response) {   
         const userId = getToken(req, res);
 
-        const { name,contact,description,category } : SupplierModel = req.body;
+        const { name,reasonSocial, cnpj, email, telephone } : SupplierModel = req.body;
         const supplier =  await prisma.supplier.create({
             data: {
                 name,
                 userId: userId,
-                contact,
-                description,
-                category,
+                cnpj,
+                reasonSocial,
+                email,
+                telephone
             }
         })
 
