@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dashboard } from "../dashboard";
-import { Supplier } from "../supplier";
+import { Supplier } from "../supllier";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
