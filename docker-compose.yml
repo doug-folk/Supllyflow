@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: supllyflow
+    networks:
+      - supllyflow-net
+
+  api:
+    image: supllyflow-api:0.1
+    build:
+      context: .
+      dockerfile: ./supllyflow-api/Dockerfile
+    command: npm run dev
+    ports:
+      - 3333:3333
+    environment:
+      - DATABASE_URL=postgresql://postgres:123@192.168.143.15:5434/supllyflow?schema=public
+    networks:
+      - supllyflow-net
+
+  app:
+    image: supllyflow-app:0.1
+    build:
+      context: .
+      dockerfile: ./supllyflow-app/Dockerfile
+    ports:
+      - 8081:8081
+      - 19001:19001
+      - 19002:19002
+    networks:
+      - supllyflow-net
+  
+networks:
+  supllyflow-net:
