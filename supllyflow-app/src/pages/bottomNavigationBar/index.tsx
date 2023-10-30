@@ -5,6 +5,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dashboard } from "../dashboard";
 import { Supplier } from "../supllier";
+import { Products } from "../products";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -31,7 +32,7 @@ export function BottomNavigationBar() {
       />
       <Screen
         name="product"
-        component={Dashboard}
+        component={Products}
         options={{
           headerShadowVisible: false,
           headerShown: false,

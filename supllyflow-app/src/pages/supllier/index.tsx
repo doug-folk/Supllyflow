@@ -12,6 +12,10 @@ import { styles } from "./style";
 export function Supplier() {
   const navigation = useNavigation();
 
+  function clickPorduct() {
+    navigation.navigate("detailsSuppiler" as never);
+  }
+
   return (
     <SafeAreaView style={styles.body}>
       <Text style={styles.title}>Visão</Text>
@@ -25,7 +29,7 @@ export function Supplier() {
         <Text style={styles.subtitle}>Meus Fornecedores</Text>
       </View>
 
-      <TouchableOpacity style={styles.supllier}>
+      <TouchableOpacity style={styles.supllier} onPress={clickPorduct}>
         <View style={styles.supllierRow}>
           <View style={styles.supllierRowLeft}>
             <View style={styles.circle} />
@@ -35,7 +39,7 @@ export function Supplier() {
         <View style={styles.line} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.supllier}>
+      <TouchableOpacity style={styles.supllier} onPress={clickPorduct}>
         <View style={styles.supllierRow}>
           <View style={styles.supllierRowLeft}>
             <View style={styles.circle} />
@@ -45,7 +49,7 @@ export function Supplier() {
         <View style={styles.line} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.supllier}>
+      <TouchableOpacity style={styles.supllier} onPress={clickPorduct}>
         <View style={styles.supllierRow}>
           <View style={styles.supllierRowLeft}>
             <View style={styles.circle} />
@@ -56,7 +60,7 @@ export function Supplier() {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.floatingButton} onPress={() => {
-        navigation.navigate("createSupllier" as never)
+        navigation.navigate("createSupplier" as never)
       }}>
         <MaterialIcons name="add" size={28} color="#FFFFFF" />
       </TouchableOpacity>
