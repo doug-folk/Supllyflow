@@ -18,8 +18,6 @@ export function Supplier() {
 
   return (
     <SafeAreaView style={styles.body}>
-      <Text style={styles.title}>Visão</Text>
-
       <View style={styles.circleValue}>
         <Text style={styles.circleValueText}>10</Text>
         <Text>Fornecedores</Text>
