@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: THEME.COLORS.GREEN, 
+    borderColor: THEME.COLORS.GREEN,
     marginTop: 40,
     marginBottom: 40,
   },
@@ -39,7 +39,6 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     color: THEME.COLORS.GREEN,
   },
-
   supllier: {
     width: "90%",
     height: 60,
@@ -86,4 +85,9 @@ export const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
+  load: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%"
+  }
 });

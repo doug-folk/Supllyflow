@@ -6,33 +6,59 @@ import { TextInputMask } from "react-native-masked-text";
 import { styles } from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
-interface FormData {
-  email: string;
-  name: string;
-  reasonSocial: string;
-  telephone: string;
-  cnpj: string;
-}
+import { api } from "../../../services";
+import { useAuth } from "../../../contexts/AuthContext";
+import { Supplier } from "../../../utils/interfaces/supplier";
 
 export function CreateSupplier() {
+  const navigation = useNavigation();
+
+  const { getToken, saveToken } = useAuth();
+  const token = getToken();
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
-
-   const navigation = useNavigation();
+  } = useForm<Supplier>();
 
   function prevPage() {
     navigation.goBack();
   }
 
+  function onSubmit(data: Supplier) {
+    const formData = {
+      email: data.email,
+      name: data.name,
+      reasonSocial: data.reasonSocial,
+      telephone: data.telephone,
+      cnpj: data.cnpj,
+    };
+
+    api
+      .post("/supplier", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        prevPage();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <View style={styles.area}>
       <TouchableOpacity onPress={prevPage}>
-      <MaterialIcons name="close" color="#000" size={30} style={{marginLeft: 20}} />
-
+        <MaterialIcons
+          name="close"
+          color="#000"
+          size={30}
+          style={{ marginLeft: 20 }}
+        />
       </TouchableOpacity>
       <Text style={styles.title}>Cadastrar Fornecedor</Text>
       <View style={styles.body}>
@@ -45,6 +71,7 @@ export function CreateSupplier() {
               onBlur={onBlur}
               value={value}
               style={styles.input}
+              keyboardType="email-address"
             />
           )}
           name="email"
@@ -118,6 +145,7 @@ export function CreateSupplier() {
               onBlur={onBlur}
               value={value}
               style={styles.input}
+              keyboardType="phone-pad"
             />
           )}
           name="telephone"
@@ -128,8 +156,7 @@ export function CreateSupplier() {
         )}
 
         <View style={styles.containerBtn}>
-          <ButtonPrimary title="Cadastrar" onPress={prevPage} />
-
+          <ButtonPrimary title="Cadastrar" onPress={handleSubmit(onSubmit)} />
         </View>
       </View>
     </View>
