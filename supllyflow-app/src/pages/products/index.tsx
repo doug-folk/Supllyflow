@@ -21,9 +21,7 @@ export function Products() {
 
       <TouchableOpacity
         style={styles.products}
-        onPress={() => {
-          navigation.navigate("detailsSuppiler" as never);
-        }}
+        onPress={() => {}}
       >
         <View style={styles.productsRow}>
           <View style={styles.productsRowLeft}>
