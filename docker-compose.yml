@@ -18,7 +18,7 @@ services:
   db-2:
     image: postgres:13
     ports:
-      - 5433:5432
+      - 5435:5432
 
     environment:
       POSTGRES_USER: postgres
@@ -41,10 +41,38 @@ services:
     ports:
       - 3333:3333
     environment:
-      - DATABASE_URL=postgresql://postgres:123@192.168.143.15:5434/supllyflow?schema=public
-      - DATABASE_URL_REPLICADO=postgresql://postgres:123@192.168.143.15:5434/supllyflow2?schema=public
+      - PORT=3333
+      - SECREAT_KEY=123
+      - DATABASE_URL=postgresql://postgres:123@db:5432/supllyflow?schema=public
+      - DATABASE_URL_REPLICADO=postgresql://repl_user:repl_password@db-2:5432/supllyflow2?schema=public
     networks:
       - supllyflow-net
+
+  api-2:
+    image: supllyflow-api:0.1
+    build:
+      context: .
+      dockerfile: ./supllyflow-api/Dockerfile
+    command: npm run dev
+    ports:
+      - 3334:3333
+    environment:
+      - PORT=3333
+      - SECREAT_KEY=123
+      - DATABASE_URL=postgresql://postgres:123@db:5432/supllyflow?schema=public
+      - DATABASE_URL_REPLICADO=postgresql://repl_user:repl_password@db-2:5432/supllyflow2?schema=public
+    networks:
+      - supllyflow-net
+
+
+  nginx:
+      image: nginx:latest
+      volumes:
+        - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro
+      depends_on:
+        - api
+      ports:
+        - "80:80"
 
   app:
     image: supllyflow-app:0.1
