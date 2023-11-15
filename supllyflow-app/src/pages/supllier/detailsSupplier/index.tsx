@@ -1,12 +1,12 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Supplier } from "../../../utils/interfaces/supplier";
 import { styles } from "./style";
 
 type Navigation = {
-  navigate: (value: string, {}: Supplier) => void;
+  navigate: (value: string, {}?: Supplier) => void;
 };
 
 export function DetailsSuppiler() {
@@ -18,6 +18,12 @@ export function DetailsSuppiler() {
   function prevPage() {
     navigation.goBack();
   }
+
+   const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <View>
@@ -37,6 +43,9 @@ export function DetailsSuppiler() {
         >
           <Text style={styles.editTextBtn}>Editar</Text>
         </TouchableOpacity>
+
+
+        
       </View>
       <Text style={styles.title}>{paramsData.name}</Text>
 

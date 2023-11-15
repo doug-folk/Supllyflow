@@ -10,8 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Dashboard } from '../../pages/dashboard';
 import { CreateSupplier } from '../../pages/supllier/createSupplier';
 import { DetailsSuppiler } from '../../pages/supllier/detailsSupplier';
-import { Products } from '../../pages/products';
 import { CreateProduct } from '../../pages/products/createProduct';
+import { UpdateSupplier } from '../../pages/supllier/updateSupplier';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +27,7 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="bottomNavigationBar" component={BottomNavigationBar} />
         <Stack.Screen name="dashboard" component={Dashboard} />
         <Stack.Screen name="createSupplier" component={CreateSupplier} />
+        <Stack.Screen name="updateSupplier" component={UpdateSupplier} />
         <Stack.Screen name="createProduct" component={CreateProduct} />
         <Stack.Screen name="detailsSuppiler" component={DetailsSuppiler} />
       </Stack.Navigator>
