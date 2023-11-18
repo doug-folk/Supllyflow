@@ -20,6 +20,7 @@ router.post("/user", userController.store);
 router.post("/auth", authController.authenticate);
 
 router.post("/supplier", AuthMiddleware, supplierController.create);
+router.put("/supplier", AuthMiddleware, supplierController.updateSupplier);
 router.get("/supplier", AuthMiddleware, supplierController.findSuppliersUser);
 
 router.post("/product", AuthMiddleware, productController.create);

@@ -8,10 +8,10 @@ import { Welcome } from '../../pages/signUp/welcome';
 import { BottomNavigationBar } from '../../pages/bottomNavigationBar';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Dashboard } from '../../pages/dashboard';
-import { CreateSupplier } from '../../pages/supllier/createSupplier';
-import { DetailsSuppiler } from '../../pages/supllier/detailsSupplier';
 import { CreateProduct } from '../../pages/products/createProduct';
-import { UpdateSupplier } from '../../pages/supllier/updateSupplier';
+import { DetailsSuppiler } from '../../pages/supplier/detailsSupplier';
+import { CreateSupplier } from '../../pages/supplier/createSupplier';
+import { UpdateSupplier } from '../../pages/supplier/updateSupplier';
 
 const Stack = createStackNavigator();
 
