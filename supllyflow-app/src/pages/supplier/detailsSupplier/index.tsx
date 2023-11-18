@@ -10,9 +10,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Supplier } from "../../../utils/interfaces/supplier";
 import { styles } from "./style";
+import { api } from "../../../services";
+import { useAuth } from "../../../contexts/AuthContext";
 
 type Navigation = {
-  navigate: (value: string, {}?: Supplier) => void;
+  navigate: (value: string, { }?: Supplier) => void;
 };
 
 export function DetailsSuppiler() {
@@ -20,6 +22,9 @@ export function DetailsSuppiler() {
 
   const route = useRoute();
   const paramsData = route.params as Supplier;
+
+  const { getToken } = useAuth();
+  const token = getToken();
 
   function prevPage() {
     navigation.goBack();
@@ -30,6 +35,25 @@ export function DetailsSuppiler() {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  function updateSupplier() {
+    navigation.navigate("updateSupplier", paramsData);
+  }
+
+  async function deleteSupplier() {
+    await api.delete(`supplier/${paramsData.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
+      console.log(response.data);
+      toggleModal()
+      prevPage();
+    })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   return (
     <SafeAreaView>
@@ -46,16 +70,14 @@ export function DetailsSuppiler() {
         <View style={styles.btnsAppBar}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("updateSupplier" as never);
+              toggleModal()
             }}
           >
             <MaterialIcons name="delete" size={26} color="#ffffff" />
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("updateSupplier" as never);
-            }}
+            onPress={() => updateSupplier()}
           >
             <MaterialIcons name="edit" size={26} color="#ffffff" />
           </TouchableOpacity>
@@ -100,6 +122,24 @@ export function DetailsSuppiler() {
           <Text style={styles.itemValue}>{paramsData.email}</Text>
         </View>
       </View>
+
+      <Modal visible={isModalVisible} transparent={true}  >
+        <View style={styles.modalDeleteContent}>
+          <View style={styles.modalDeleteMain}>
+            <Text style={styles.titleModalDelete}>Deseja excluir fornecedor?</Text>
+
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10, marginTop: 20 }}>
+              <TouchableOpacity style={styles.btnYes} onPress={deleteSupplier}>
+                <Text style={styles.textBtnYes}>SIM</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnNo} onPress={toggleModal}>
+                <Text style={styles.textBtnYes}>NÃO</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }

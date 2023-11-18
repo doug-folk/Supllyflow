@@ -1,31 +1,63 @@
-import { TextInput, View, Text, TouchableOpacity } from "react-native";
+import { TextInput, View, Text, TouchableOpacity, Modal } from "react-native";
 import ButtonPrimary from "../../../components/buttonPrimary";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TextInputMask } from "react-native-masked-text";
 import { styles } from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-
-interface FormData {
-  email: string;
-  name: string;
-  reasonSocial: string;
-  telephone: string;
-  cnpj: string;
-}
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Supplier } from "../../../utils/interfaces/supplier";
+import { api } from "../../../services";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export function UpdateSupplier() {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<Supplier>();
 
-   const navigation = useNavigation();
+  
+  const route = useRoute();
+  const paramsData = route.params as Supplier;
+
+  const id = paramsData.id;
+
+  const navigation = useNavigation();
+  
+  const { getToken } = useAuth();
+  const token = getToken();
 
   function prevPage() {
     navigation.goBack();
+     navigation.goBack();
+  }
+
+  function onSubmit(data: Supplier) {
+    const formData = {
+      id: id,
+      email: data.email,
+      name: data.name,
+      reasonSocial: data.reasonSocial,
+      telephone: data.telephone,
+      cnpj: data.cnpj,
+    };
+
+    console.log(data.id)
+
+    api
+      .put("/supplier", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        prevPage();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -38,6 +70,7 @@ export function UpdateSupplier() {
       <View style={styles.body}>
         <Controller
           control={control}
+          defaultValue={paramsData.email}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               placeholder="Email"
@@ -56,6 +89,8 @@ export function UpdateSupplier() {
 
         <Controller
           control={control}
+          defaultValue={paramsData.name}
+
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               placeholder="Nome"
@@ -74,6 +109,7 @@ export function UpdateSupplier() {
 
         <Controller
           control={control}
+          defaultValue={paramsData.reasonSocial}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               placeholder="Razão Social"
@@ -93,6 +129,7 @@ export function UpdateSupplier() {
         <Controller
           control={control}
           name="cnpj"
+          defaultValue={paramsData.cnpj}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInputMask
               type={"cnpj"}
@@ -111,6 +148,7 @@ export function UpdateSupplier() {
 
         <Controller
           control={control}
+          defaultValue={paramsData.telephone}
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
               placeholder="(00)00000-0000"
@@ -128,7 +166,7 @@ export function UpdateSupplier() {
         )}
 
         <View style={styles.containerBtn}>
-          <ButtonPrimary title="Salvar" onPress={prevPage} />
+          <ButtonPrimary title="Salvar" onPress={handleSubmit(onSubmit)} />
 
         </View>
       </View>
