@@ -36,4 +36,11 @@ export class SupplierRepository{
 
         return supplier;
     }
+
+    static async deleteSupplier(idSupplier: string) {
+        const supplier = await prisma.supplier.delete({
+            where: { id: idSupplier },
+        });
+        return supplier;
+    }
 }

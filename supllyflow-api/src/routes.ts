@@ -22,6 +22,8 @@ router.post("/auth", authController.authenticate);
 router.post("/supplier", AuthMiddleware, supplierController.create);
 router.put("/supplier", AuthMiddleware, supplierController.updateSupplier);
 router.get("/supplier", AuthMiddleware, supplierController.findSuppliersUser);
+router.delete("/supplier/:id", AuthMiddleware, supplierController.deleteSupplier);
 
 router.post("/product", AuthMiddleware, productController.create);
 router.get("/product", AuthMiddleware, productController.findProductUser);
+
