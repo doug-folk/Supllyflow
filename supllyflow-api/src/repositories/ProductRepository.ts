@@ -3,7 +3,7 @@ import prisma from "../utils/prisma";
 
 export class ProductRepository {
     static async createProduct(
-        { name, description, amount, category, supplierId }: ProductModel,
+        { name, description, amount, category, supplierId, stockCurrent, stockMax, stockMin, dueDate }: ProductModel,
         userId: string
     ) {
         const product = await prisma.product.create({
@@ -14,6 +14,10 @@ export class ProductRepository {
                 description,
                 amount,
                 category,
+                stockMax,
+                stockMin,
+                stockCurrent,
+                dueDate
             },
         });
 
