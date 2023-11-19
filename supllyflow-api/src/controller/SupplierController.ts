@@ -66,4 +66,21 @@ export class SupplierController {
             return res.status(500).json("Erro ao excluir fornecedor");
         }
     }
+
+    async getSupplier(req: Request, res: Response) {
+        try {
+            const userId = getToken(req, res);
+
+             const idSupplier = req.params.id;
+
+            const supplier = await SupplierRepository.getSupplier(idSupplier);
+
+            return res.json({ supplier });
+
+        } catch (error) {
+
+            console.error("Erro ao listar fornecedor:", error);
+            return res.status(404).json("Erro ao listar fornecedor:");
+        }
+    }
 }

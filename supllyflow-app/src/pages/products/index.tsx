@@ -14,8 +14,13 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Product } from "../../utils/interfaces/product";
 import { Supplier } from "../../utils/interfaces/supplier";
 
+type Navigation = {
+  navigate: (value: string, {}?: Product) => void;
+};
+
+
 export function Products() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<Navigation>();
 
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -42,6 +47,11 @@ export function Products() {
     getProducts();
   });
 
+  
+  function clickProduct(product: Product) {
+    navigation.navigate("detailsProduct", product);
+  }
+
   return (
     <SafeAreaView style={styles.body}>
       <View style={styles.circleValue}>
@@ -56,7 +66,7 @@ export function Products() {
         data={products}
         style={{ width: "90%" }}
         renderItem={({ item, index }) => (
-          <TouchableOpacity style={styles.products} onPress={() => {}}>
+          <TouchableOpacity style={styles.products} onPress={() => clickProduct(item)}>
             <View style={styles.productsRow}>
               <View style={styles.productsRowLeft}>
                 <View style={styles.circle} />
