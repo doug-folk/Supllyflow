@@ -73,17 +73,17 @@ services:
       ports:
         - "80:80"
 
-  # app:
-  #   image: supllyflow-app:0.1
-  #   build:
-  #     context: .
-  #     dockerfile: ./supllyflow-app/Dockerfile
-  #   ports:
-  #     - 8081:8081
-  #     - 19001:19001
-  #     - 19002:19002
-  #   networks:
-  #     - supllyflow-net
+  app:
+    image: supllyflow-app:0.1
+    build:
+      context: .
+      dockerfile: ./supllyflow-app/Dockerfile
+    ports:
+      - 8081:8081
+      - 19001:19001
+      - 19002:19002
+    networks:
+      - supllyflow-net
   
 networks:
   supllyflow-net:
