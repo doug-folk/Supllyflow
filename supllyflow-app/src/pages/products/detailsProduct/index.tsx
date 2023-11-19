@@ -12,16 +12,17 @@ import { Supplier } from "../../../utils/interfaces/supplier";
 import { styles } from "./style";
 import { api } from "../../../services";
 import { useAuth } from "../../../contexts/AuthContext";
+import { Product } from "../../../utils/interfaces/product";
 
 type Navigation = {
-  navigate: (value: string, { }?: Supplier) => void;
+  navigate: (value: string, { }?: Product) => void;
 };
 
-export function DetailsSuppiler() {
+export function DetailsProduct() {
   const navigation = useNavigation<Navigation>();
 
   const route = useRoute();
-  const paramsData = route.params as Supplier;
+  const paramsData = route.params as Product;
 
   const { getToken } = useAuth();
   const token = getToken();
@@ -91,8 +92,8 @@ export function DetailsSuppiler() {
         <View style={styles.circle} />
 
         <View>
-          <Text style={styles.itemTitle}>Telefone</Text>
-          <Text style={styles.itemValue}>{paramsData.telephone}</Text>
+          <Text style={styles.itemTitle}>Descrição</Text>
+          <Text style={styles.itemValue}>{paramsData.description}</Text>
         </View>
       </View>
 
@@ -100,8 +101,8 @@ export function DetailsSuppiler() {
         <View style={styles.circle} />
 
         <View>
-          <Text style={styles.itemTitle}>CNPJ</Text>
-          <Text style={styles.itemValue}>{paramsData.cnpj}</Text>
+          <Text style={styles.itemTitle}>Categoria</Text>
+          <Text style={styles.itemValue}>{paramsData.category}</Text>
         </View>
       </View>
 
@@ -109,8 +110,8 @@ export function DetailsSuppiler() {
         <View style={styles.circle} />
 
         <View>
-          <Text style={styles.itemTitle}>Razão Social</Text>
-          <Text style={styles.itemValue}>{paramsData.reasonSocial}</Text>
+          <Text style={styles.itemTitle}>Valor</Text>
+          <Text style={styles.itemValue}>{paramsData.amount}</Text>
         </View>
       </View>
 
@@ -118,8 +119,8 @@ export function DetailsSuppiler() {
         <View style={styles.circle} />
 
         <View>
-          <Text style={styles.itemTitle}>Email</Text>
-          <Text style={styles.itemValue}>{paramsData.email}</Text>
+          <Text style={styles.itemTitle}>Fornecedor</Text>
+          <Text style={styles.itemValue}>{paramsData.supplierId}</Text>
         </View>
       </View>
 

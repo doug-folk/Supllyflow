@@ -43,4 +43,15 @@ export class SupplierRepository{
         });
         return supplier;
     }
+
+    
+    static async getSupplier(idSupplier: string) {  
+
+        const supplier = await prisma.supplier.findMany({
+            where: {id: idSupplier},
+         });
+        return supplier;
+    }
+
+
 }
