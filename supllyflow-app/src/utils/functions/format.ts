@@ -6,3 +6,8 @@ export function formatDate(dateString: string) {
     let formatado = format(date, 'dd/MM/yyyy', { locale: ptBR })
     return formatado;
 }
+
+export const doubleString = (n: number) : string => {
+    const text = n.toFixed(2).toString();
+    return text.replace('.', ',');
+  };
