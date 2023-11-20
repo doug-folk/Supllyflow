@@ -87,4 +87,19 @@ export const styles = StyleSheet.create({
     textAlign: "center",
 
   },
+  load: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%"
+  },
+  totalText: {
+    fontSize: 20,
+    fontWeight: "600"
+  },
+  valueTotal: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: THEME.COLORS.GREEN
+    
+  }
 });
