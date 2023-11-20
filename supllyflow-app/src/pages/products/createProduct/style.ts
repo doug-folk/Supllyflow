@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
   },
   body: {
     alignItems: "center",
+    marginTop: 30
   },
   title: {
     color: THEME.COLORS.PRIMARY,
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 20,
     width: "90%",
     alignItems: "center",
-    marginTop: 25,
+    marginBottom: 25,
     fontWeight: "500",
   },
   containerBtn: {
