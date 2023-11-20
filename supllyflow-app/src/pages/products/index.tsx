@@ -15,17 +15,18 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Product } from "../../utils/interfaces/product";
 import { Supplier } from "../../utils/interfaces/supplier";
 import { THEME } from "../../theme/theme";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 type Navigation = {
   navigate: (value: string, {}?: Product) => void;
 };
-
 
 export function Products() {
   const navigation = useNavigation<Navigation>();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [isCarreg, setIsCarreg] = useState<boolean>(false);
+  const [valueTotal, setValueTotal] = useState<Float>(0);
 
   const { getToken } = useAuth();
   const token = getToken();
@@ -45,38 +46,64 @@ export function Products() {
         console.error(error);
       });
   }
+
+  const sumProducts = (): number => {
+    return products.reduce((soma, item) => soma + (item.amount * parseInt(item.stockCurrent)), 0);
+  };
+
   useFocusEffect(() => {
     getProducts();
   });
 
-  
   function clickProduct(product: Product) {
     navigation.navigate("detailsProduct", product);
   }
 
+  const doubleString = (n: number) : string => {
+    const text = n.toFixed(2).toString();
+    return text.replace('.', ',');
+  };
+
+
   if (isCarreg) {
-    return products.length > 0 ? (
+    return (
       <SafeAreaView style={styles.body}>
         <View style={styles.circleValue}>
-          <Text style={styles.circleValueText}>R$ 50,00</Text>
+          <Text style={styles.circleValueText}>
+            R$ {doubleString(sumProducts())}
+          </Text>
         </View>
 
         <View style={styles.subtitleRow}>
           <Text style={styles.subtitle}>Produtos</Text>
         </View>
 
+        {products.length == 0 ? (
+          <View
+          >
+            <Text style={{ fontSize: 22 }}>Nenhum Produto Cadastrado</Text>
+          </View>
+        ) : (
+          <View></View>
+        )}
+
         <FlatList
           data={products}
           style={{ width: "90%" }}
           renderItem={({ item, index }) => (
-            <TouchableOpacity style={styles.products} onPress={() => clickProduct(item)}>
+            <TouchableOpacity
+              style={styles.products}
+              onPress={() => clickProduct(item)}
+            >
               <View style={styles.productsRow}>
                 <View style={styles.productsRowLeft}>
                   <View style={styles.circle} />
                   <Text style={styles.productsName}>{item.name}</Text>
                 </View>
                 <View>
-                  <Text style={styles.productsName}>R$ {item.amount}</Text>
+                  <Text style={styles.productsName}>
+                    R$ {doubleString(item.amount * parseInt(item.stockCurrent))}
+                  </Text>
                 </View>
               </View>
               <View style={styles.line} />
@@ -93,11 +120,6 @@ export function Products() {
           <MaterialIcons name="add" size={28} color="#FFFFFF" />
         </TouchableOpacity>
       </SafeAreaView>
-      
-    ) : (
-      <View>
-        <Text>Teste</Text>
-      </View>
     );
   } else {
     return (
