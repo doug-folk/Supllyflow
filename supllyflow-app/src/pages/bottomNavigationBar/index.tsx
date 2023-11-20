@@ -4,6 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dashboard } from "../dashboard";
+import { Products } from "../products";
+import { SupplierPage } from "../supplier";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -22,15 +24,15 @@ export function BottomNavigationBar() {
           },
           tabBarIcon: ({ size, focused }) => {
             if (focused) {
-              return <Entypo name="home" size={size} color="#5AE468" />;
+              return <Entypo name="home" size={size} color="#00633F" />;
             }
             return <Entypo name="home" size={size} color="#000" />;
           },
         }}
       />
       <Screen
-        name="relatorios"
-        component={Dashboard}
+        name="product"
+        component={Products}
         options={{
           headerShadowVisible: false,
           headerShown: false,
@@ -41,10 +43,30 @@ export function BottomNavigationBar() {
           tabBarIcon: ({ size, focused }) => {
             if (focused) {
               return (
-                <MaterialIcons name="assignment" size={size} color="#5AE468" />
+                <MaterialIcons name="inventory" size={size} color="#00633F" />
               );
             }
-            return <MaterialIcons name="assignment" size={size} color="#000" />;
+            return <MaterialIcons name="inventory" size={size} color="#000" />;
+          },
+        }}
+      />
+      <Screen
+        name="supplier"
+        component={SupplierPage}
+        options={{
+          headerShadowVisible: false,
+          headerShown: false,
+          tabBarLabelStyle: {
+            color: "#fff",
+            fontSize: 1,
+          },
+          tabBarIcon: ({ size, focused }) => {
+            if (focused) {
+              return (
+                <MaterialIcons name="store" size={size} color="#00633F" />
+              );
+            }
+            return <MaterialIcons name="store" size={size} color="#000" />;
           },
         }}
       />
@@ -61,7 +83,7 @@ export function BottomNavigationBar() {
           tabBarIcon: ({ size, focused }) => {
             if (focused) {
               return (
-                <Ionicons name="settings-sharp" size={size} color="#5AE468" />
+                <Ionicons name="settings-sharp" size={size} color="#00633F" />
               );
             }
             return <Ionicons name="settings-sharp" size={size} color="#000" />;
