@@ -18,6 +18,7 @@ import { THEME } from "../../../theme/theme";
 import { parseISO, format } from 'date-fns';
 import { ptBR } from "date-fns/locale";
 import { formatDate } from "../../../utils/functions/format";
+import { UpdateProduct } from "../updateProduct";
 
 
 type Navigation = {
@@ -87,6 +88,10 @@ export function DetailsProduct() {
     const text = n.toFixed(2).toString();
     return text.replace('.', ',');
   };
+  
+  function clickUpdate() {
+    navigation.navigate("updateProduct", paramsData);
+  }
 
   useEffect(() => {
     getSupplier();
@@ -115,7 +120,7 @@ export function DetailsProduct() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => updateSupplier()}
+              onPress={() => clickUpdate()}
             >
               <MaterialIcons name="edit" size={26} color="#ffffff" />
             </TouchableOpacity>

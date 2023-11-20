@@ -20,6 +20,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import RNPickerSelect from "react-native-picker-select";
 import { Snackbar } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { formatDate } from "../../../utils/functions/format";
 
 export function CreateProduct() {
   const {
@@ -274,7 +275,8 @@ export function CreateProduct() {
         <View style={{justifyContent: "flex-start", alignItems: "flex-start", width: "90%"}}>
         <TouchableOpacity onPress={showDatepicker} style={{flexDirection: "row", gap: 10, alignItems: "center", backgroundColor: "#fff", padding: 10, borderRadius:10}}>
           <MaterialIcons name="calendar-today" size={30} color="#00633F" />
-          <Text>Selecione a data de vencimento</Text>
+            <Text>Selecione a data de vencimento</Text>
+            <Text>{formatDate(date.toString())}</Text>
         </TouchableOpacity>
 
         </View>

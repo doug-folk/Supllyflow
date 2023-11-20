@@ -16,6 +16,7 @@ import { Product } from "../../utils/interfaces/product";
 import { Supplier } from "../../utils/interfaces/supplier";
 import { THEME } from "../../theme/theme";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
+import { doubleString } from "../../utils/functions/format";
 
 type Navigation = {
   navigate: (value: string, {}?: Product) => void;
@@ -58,12 +59,6 @@ export function Products() {
   function clickProduct(product: Product) {
     navigation.navigate("detailsProduct", product);
   }
-
-  const doubleString = (n: number) : string => {
-    const text = n.toFixed(2).toString();
-    return text.replace('.', ',');
-  };
-
 
   if (isCarreg) {
     return (
