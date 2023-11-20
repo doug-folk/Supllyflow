@@ -6,9 +6,9 @@ COPY supllyflow-app/package*.json ./
 
 COPY supllyflow-app ./
 
-# RUN npm install react-native-safe-area-context
+RUN npm install react-native-safe-area-context
 
-# RUN npm install react-native-gesture-handler
+RUN npm install react-native-gesture-handler
 
 RUN npm install
 
