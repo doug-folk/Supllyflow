@@ -64,6 +64,15 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.ALERT,
     borderRadius: 25,
   },
+  appBar: {
+    backgroundColor: THEME.COLORS.PRIMARY,
+    paddingTop: 5,
+    flexDirection: "row",
+    height: 60,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   line: {
     borderBottomColor: "#E8E8E8",
     borderBottomWidth: 1,

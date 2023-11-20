@@ -66,6 +66,10 @@ export function DueDate() {
       });
   }
 
+  function prevPage() {
+    navigation.goBack();
+  }
+
   useFocusEffect(() => {
     getProducts();
   });
@@ -73,6 +77,19 @@ export function DueDate() {
   if (isCarreg) {
     return (
       <SafeAreaView style={styles.body}>
+                <View style={styles.appBar}>
+          <TouchableOpacity onPress={prevPage}>
+            <MaterialIcons
+              name="arrow-back-ios"
+              color="#fff"
+              size={30}
+              style={{ marginLeft: 20 }}
+            />
+          </TouchableOpacity>
+
+         
+
+        </View>
         <View style={styles.circleValue}>
           <Text style={styles.circleValueText}>
             15
@@ -116,15 +133,6 @@ export function DueDate() {
             </TouchableOpacity>
           )}
         />
-
-        <TouchableOpacity
-          style={styles.floatingButton}
-          onPress={() => {
-            navigation.navigate("createProduct" as never);
-          }}
-        >
-          <MaterialIcons name="add" size={28} color={THEME.COLORS.GREEN? "#000" : "#fff"} />
-        </TouchableOpacity>
       </SafeAreaView>
     );
   } else {
