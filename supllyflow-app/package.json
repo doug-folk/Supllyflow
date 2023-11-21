@@ -29,7 +29,9 @@
     "react-native-masked-text": "^1.12.5",
     "react-native-paper": "^5.10.6",
     "react-native-picker-select": "^9.0.0",
+    "react-native-pie-chart": "^3.0.1",
     "react-native-snackbar": "^2.6.2",
+    "react-native-svg": "^14.0.0",
     "react-native-web": "~0.19.6",
     "resolvers": "^1.0.0",
     "zod": "^3.22.4"
