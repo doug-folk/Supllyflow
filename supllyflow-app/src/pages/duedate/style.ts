@@ -106,4 +106,3 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%"
   }
-});
