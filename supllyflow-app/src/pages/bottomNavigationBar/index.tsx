@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Dashboard } from "../dashboard";
 import { Products } from "../products";
 import { SupplierPage } from "../supplier";
+import { Settings } from "../settings";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -72,7 +73,7 @@ export function BottomNavigationBar() {
       />
       <Screen
         name="settings"
-        component={Dashboard}
+        component={Settings}
         options={{
           headerShadowVisible: false,
           headerShown: false,

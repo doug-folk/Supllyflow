@@ -14,8 +14,9 @@ import { CreateSupplier } from '../../pages/supplier/createSupplier';
 import { UpdateSupplier } from '../../pages/supplier/updateSupplier';
 import { DetailsProduct } from '../../pages/products/detailsProduct';
 import { UpdateProduct } from '../../pages/products/updateProduct';
+import { DueDate } from '../../pages/duedate';
 
-const Stack = createStackNavigator();
+const   Stack = createStackNavigator();
 
 const Navigation: React.FC = () => {
   return (
@@ -34,6 +35,7 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="detailsSuppiler" component={DetailsSuppiler} />
         <Stack.Screen name="detailsProduct" component={DetailsProduct} />
         <Stack.Screen name="updateProduct" component={UpdateProduct} />
+        <Stack.Screen name="dueDate" component={DueDate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
