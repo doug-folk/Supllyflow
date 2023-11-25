@@ -24,6 +24,7 @@ model User {
   road         String
   neighborhood String
   number       String
+  cep          String
 
   product   Product[]
   suppliers Supplier[]

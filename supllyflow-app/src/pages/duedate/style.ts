@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: THEME.COLORS.GREEN, 
+    borderColor: THEME.COLORS.GREEN,
     marginTop: 40,
     marginBottom: 40,
   },
@@ -106,3 +106,4 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%"
   }
+});
