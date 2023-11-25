@@ -10,7 +10,7 @@ export class UserController {
     return res.json({ users });
   }
 
-  async store(req: Request, res: Response) {
+  async createUser(req: Request, res: Response) {
     const data: UserModel = req.body;
 
     const userExists = await prisma.user.findUnique({
