@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     gap: 30,
     width: "90%",
     borderRadius: 20,
-    marginTop: 40,
+    marginTop: 30,
   },
   cardShortcut: {
     backgroundColor: THEME.COLORS.GREEN,

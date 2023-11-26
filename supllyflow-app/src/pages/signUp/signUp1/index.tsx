@@ -121,7 +121,7 @@ export function SignUp1() {
             <Text style={{ color: "red" }}>{errors.cnpj.message}</Text>
           )}
 
-          <Controller
+          {/* <Controller
             control={control}
             name="fieldOfActivity"
             render={({ field: { onChange, onBlur, value } }) => (
@@ -137,7 +137,7 @@ export function SignUp1() {
           />
           {errors.fieldOfActivity && (
             <Text style={{ color: "red" }}>{errors.fieldOfActivity.message}</Text>
-          )}
+          )} */}
 
           <ButtonPrimary title="Próximo" onPress={handleSubmit(onSubmit)} />
 

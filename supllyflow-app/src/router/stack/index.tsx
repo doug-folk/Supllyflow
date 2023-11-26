@@ -15,6 +15,7 @@ import { UpdateSupplier } from '../../pages/supplier/updateSupplier';
 import { DetailsProduct } from '../../pages/products/detailsProduct';
 import { UpdateProduct } from '../../pages/products/updateProduct';
 import { DueDate } from '../../pages/duedate';
+import { Notifications } from '../../pages/notifications';
 
 const   Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="detailsProduct" component={DetailsProduct} />
         <Stack.Screen name="updateProduct" component={UpdateProduct} />
         <Stack.Screen name="dueDate" component={DueDate} />
+        <Stack.Screen name="notifications" component={Notifications} />
       </Stack.Navigator>
     </NavigationContainer>
   );

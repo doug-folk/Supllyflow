@@ -9,6 +9,7 @@ import { FormDataSignUp2 } from "../signUp2";
 import axios from "axios";
 import { THEME } from "../../../theme/theme";
 import { api } from "../../../services";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export interface FormDataSignUp3 {
   responsibleName: string;
@@ -44,6 +45,8 @@ export function SignUp3() {
     formState: { errors },
   } = useForm<FormDataSignUp3>();
 
+  const { saveToken } = useAuth();
+
   function onSubmit(data: FormDataSignUp3) {
     setIsLoading(true);
     const formData =  {
@@ -65,6 +68,7 @@ export function SignUp3() {
     api.post('/user', formData)
       .then((response) => {
         console.log(response.data);
+        saveToken(response.data.token);
         navigation.navigate("welcome" as never);
       })
       .catch((error) => {

@@ -16,7 +16,7 @@ router.get("/", (req: Request, res: Response) => {
     res.json({ msg: "hello" });
 });
 
-router.post("/user", userController.store);
+router.post("/user", userController.createUser);
 router.post("/auth", authController.authenticate);
 
 router.post("/supplier", AuthMiddleware, supplierController.create);

@@ -53,8 +53,8 @@ export function SupplierPage() {
   }
 
   if (isCarreg) {
-    return suppliers.length > 0 ? (
-      <SafeAreaView style={styles.body}>
+    
+      return <SafeAreaView style={styles.body}>
         <View style={styles.circleValue}>
           <Text style={styles.circleValueText}>{suppliers.length}</Text>
           <Text>Fornecedores</Text>
@@ -63,6 +63,16 @@ export function SupplierPage() {
         <View style={styles.subtitleRow}>
           <Text style={styles.subtitle}>Meus Fornecedores</Text>
         </View>
+
+         {suppliers.length == 0 ? (
+          <View
+          >
+            <Text style={{ fontSize: 22, marginTop: 20 }}>Nenhum Fornecedor Cadastrado</Text>
+          </View>
+        ) : (
+          <View></View>
+        )}
+
 
         <FlatList
           data={suppliers}
@@ -93,11 +103,6 @@ export function SupplierPage() {
           <MaterialIcons name="add" size={28} color="#FFFFFF" />
         </TouchableOpacity>
       </SafeAreaView>
-    ) : (
-      <View>
-        <Text>Teste</Text>
-      </View>
-    );
   } else {
     return (
       <View style={styles.load}>
