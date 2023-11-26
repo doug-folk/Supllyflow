@@ -1,5 +1,3 @@
-// authContext.tsx
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, ReactNode } from "react";
 

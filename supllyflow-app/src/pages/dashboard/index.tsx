@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { styles } from "./style";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -19,12 +20,10 @@ import { Product } from "../../utils/interfaces/product";
 import { useAuth } from "../../contexts/AuthContext";
 
 export function Dashboard() {
+
   const widthAndHeight = 90;
-  const series = [123, 321];
   const sliceColor = ["#fff", THEME.COLORS.ALERT];
-  const series2 = [123, 321];
   const sliceColor2 = ["#fff", "#5040A3"];
-  const series3 = [123, 321];
   const sliceColor3 = ["#fff", "#ECF95E"];
 
   const navigation = useNavigation();
@@ -34,18 +33,42 @@ export function Dashboard() {
   const [isCarreg, setIsCarreg] = useState<boolean>(false);
 
   const sumStockCurrent = (): number => {
-    return products.reduce(
+    const result = products.reduce(
       (soma, item) => soma + parseInt(item.stockCurrent),
       0
     );
+
+    if (result > 0) {
+      return result;
+    } else {
+      return 0;
+    }
   };
 
   const sumStockMin = (): number => {
-    return products.reduce((soma, item) => soma + parseInt(item.stockMin), 0);
+    const result = products.reduce(
+      (soma, item) => soma + parseInt(item.stockMin),
+      0
+    );
+
+    if (result > 0) {
+      return result;
+    } else {
+      return 0;
+    }
   };
 
   const sumStockMax = (): number => {
-    return products.reduce((soma, item) => soma + parseInt(item.stockMax), 0);
+    const result = products.reduce(
+      (soma, item) => soma + parseInt(item.stockMax),
+      0
+    );
+
+    if (result > 0) {
+      return result;
+    } else {
+      return 0;
+    }
   };
 
   async function getProducts() {
@@ -71,128 +94,181 @@ export function Dashboard() {
   if (isCarreg) {
     return (
       <SafeAreaView>
-        <View style={styles.appBar}>
-          <Text style={styles.title}>Dashboard</Text>
-          <View style={styles.btnsAppBar}>
-            <MaterialIcons name="notifications-none" size={30} />
-            <MaterialIcons name="account-circle" size={50} />
-          </View>
-        </View>
-
-        <View style={styles.body}>
-          <View style={styles.stocks}>
-            <Card style={styles.cardStock}>
-              <Text style={styles.titleCardStock}>Estoque atual</Text>
-
-              <View style={styles.container}>
-                <View style={styles.elemento1}>
-                  <PieChart
-                    widthAndHeight={widthAndHeight}
-                    series={[
-                      sumStockCurrent(),
-                      sumStockMax() - sumStockCurrent(),
-                    ]}
-                    sliceColor={sliceColor}
-                    coverRadius={0.8}
-                    coverFill={THEME.COLORS.GREEN}
-                  />
-                </View>
-
-                <View style={styles.elemento2}>
-                  <Text style={styles.chartTitle}>produtos</Text>
-                  <Text style={styles.chartProduct}>{sumStockCurrent()}</Text>
-                </View>
-              </View>
-            </Card>
-            <Card style={styles.cardStock}>
-              <Text style={styles.titleCardStock}>Estoque mínimo</Text>
-
-              <View style={styles.container}>
-                <View style={styles.elemento1}>
-                  <PieChart
-                    widthAndHeight={widthAndHeight}
-                    series={series2}
-                    sliceColor={sliceColor2}
-                    coverRadius={0.8}
-                    coverFill={THEME.COLORS.GREEN}
-                  />
-                </View>
-
-                <View style={styles.elemento2}>
-                  <Text style={styles.chartTitle}>produtos</Text>
-                  <Text style={styles.chartProduct}>{sumStockMin()}</Text>
-                </View>
-              </View>
-            </Card>
-            <Card style={styles.cardStock}>
-              <Text style={styles.titleCardStock}>Estoque máximo</Text>
-
-              <View style={styles.container}>
-                <View style={styles.elemento1}>
-                  <PieChart
-                    widthAndHeight={widthAndHeight}
-                    series={series3}
-                    sliceColor={sliceColor3}
-                    coverRadius={0.8}
-                    coverFill={THEME.COLORS.GREEN}
-                  />
-                </View>
-
-                <View style={styles.elemento2}>
-                  <Text style={styles.chartTitle}>produtos</Text>
-                  <Text style={styles.chartProduct}>{sumStockMax()}</Text>
-                </View>
-              </View>
-            </Card>
-          </View>
-
-          <View style={styles.shortcuts}>
-            <View style={styles.shortcutsDiv}>
-              <TouchableOpacity style={styles.cardShortcut} onPress={() => {}}>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <Image source={require("../../assets/archive.png")} />
-                </View>
-                <Text style={styles.titleCardShortcut}>Produtos</Text>
+        <ScrollView>
+          <View style={styles.appBar}>
+            <Text style={styles.title}>Dashboard</Text>
+            <View style={styles.btnsAppBar}>
+              <TouchableOpacity onPress={() => navigation.navigate("notifications" as never)}>
+                <MaterialIcons name="notifications-none" size={30} />
               </TouchableOpacity>
-
-              <TouchableOpacity style={styles.cardShortcut}>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <Image source={require("../../assets/supplier.png")} />
-                </View>
-                <Text style={styles.titleCardShortcut}>Fornecedores</Text>
+                
+              <TouchableOpacity onPress={() => navigation.navigate("settings" as never)}>
+                <MaterialIcons name="account-circle" size={50} />
               </TouchableOpacity>
-            </View>
-
-            <View style={styles.shortcutsDiv}>
-              <TouchableOpacity style={styles.cardShortcut}>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <Image source={require("../../assets/relatorio.png")} />
-                </View>
-                <Text style={styles.titleCardShortcut}>Relatórios</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.cardShortcut}
-                onPress={() => {
-                  navigation.navigate("dueDate" as never);
-                }}
-              >
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <Image source={require("../../assets/calendar.png")} />
-                </View>
-                <Text style={styles.titleCardShortcut}>Vencimentos</Text>
-              </TouchableOpacity>
+                
             </View>
           </View>
-        </View>
+
+          <View style={styles.body}>
+            <View style={styles.stocks}>
+              <Card style={styles.cardStock}>
+                <Text style={styles.titleCardStock}>Estoque atual</Text>
+
+                <View style={styles.container}>
+                  <View style={styles.elemento1}>
+                    {sumStockCurrent() > 0 ? (
+                      <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={[
+                          sumStockCurrent() - sumStockMin(),
+                          sumStockCurrent(),
+                        ]}
+                        sliceColor={sliceColor}
+                        coverRadius={0.8}
+                        coverFill={THEME.COLORS.GREEN}
+                      />
+                    ) : (
+                      <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={[100, 1]}
+                        sliceColor={sliceColor}
+                        coverRadius={0.8}
+                        coverFill={THEME.COLORS.GREEN}
+                      />
+                    )}
+                  </View>
+
+                  <View style={styles.elemento2}>
+                    <Text style={styles.chartTitle}>produtos</Text>
+                    <Text style={styles.chartProduct}>{sumStockCurrent()}</Text>
+                  </View>
+                </View>
+              </Card>
+              <Card style={styles.cardStock}>
+                <Text style={styles.titleCardStock}>Estoque mínimo</Text>
+
+                <View style={styles.container}>
+                  <View style={styles.elemento1}>
+                    {sumStockMin() > 0 ? (
+                      <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={[
+                          sumStockMin(),
+                          sumStockCurrent(),
+                        ]}
+                        sliceColor={sliceColor2}
+                        coverRadius={0.8}
+                        coverFill={THEME.COLORS.GREEN}
+                      />
+                    ) : (
+                      <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={[100, 1]}
+                        sliceColor={sliceColor2}
+                        coverRadius={0.8}
+                        coverFill={THEME.COLORS.GREEN}
+                      />
+                    )}
+                  </View>
+
+                  <View style={styles.elemento2}>
+                    <Text style={styles.chartTitle}>produtos</Text>
+                    <Text style={styles.chartProduct}>{sumStockMin()}</Text>
+                  </View>
+                </View>
+              </Card>
+              <Card style={styles.cardStock}>
+                <Text style={styles.titleCardStock}>Estoque máximo</Text>
+
+                <View style={styles.container}>
+                  <View style={styles.elemento1}>
+                    {
+                      sumStockMax() > 0 ?
+                      <PieChart
+                        widthAndHeight={widthAndHeight}
+                          series={[
+                            sumStockMax(),
+                            sumStockCurrent(),
+                        ]}
+                        sliceColor={sliceColor3}
+                        coverRadius={0.8}
+                        coverFill={THEME.COLORS.GREEN}
+                        />
+                        
+                        :
+
+                         <PieChart
+                      widthAndHeight={widthAndHeight}
+                      series={[100, 1]}
+                      sliceColor={sliceColor3}
+                      coverRadius={0.8}
+                      coverFill={THEME.COLORS.GREEN}
+                    />
+                        
+                    }
+                  </View>
+
+                  <View style={styles.elemento2}>
+                    <Text style={styles.chartTitle}>produtos</Text>
+                    <Text style={styles.chartProduct}>{sumStockMax()}</Text>
+                  </View>
+                </View>
+              </Card>
+            </View>
+
+            <View style={styles.shortcuts}>
+              <View style={styles.shortcutsDiv}>
+                <TouchableOpacity
+                  style={styles.cardShortcut}
+                  onPress={() => {
+                    navigation.navigate('product' as never); 
+                  }}
+                >
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Image source={require("../../assets/archive.png")} />
+                  </View>
+                  <Text style={styles.titleCardShortcut}>Produtos</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.cardShortcut} onPress={() => navigation.navigate("supplier" as never)}>
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Image source={require("../../assets/supplier.png")} />
+                  </View>
+                  <Text style={styles.titleCardShortcut}>Fornecedores</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.shortcutsDiv}>
+                <TouchableOpacity style={styles.cardShortcut} onPress={() => navigation.navigate('product' as never)}>
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Image source={require("../../assets/relatorio.png")} />
+                  </View>
+                  <Text style={styles.titleCardShortcut}>Relatórios</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.cardShortcut}
+                  onPress={() => {
+                    navigation.navigate("dueDate" as never);
+                  }}
+                >
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Image source={require("../../assets/calendar.png")} />
+                  </View>
+                  <Text style={styles.titleCardShortcut}>Vencimentos</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   } else {

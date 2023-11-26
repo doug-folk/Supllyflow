@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   View,
@@ -21,7 +20,7 @@ import { doubleString, formatDate } from "../../utils/functions/format";
 import { addDays, differenceInDays, isBefore } from "date-fns";
 
 type Navigation = {
-  navigate: (value: string, {}?: Product) => void;
+  navigate: (value: string, {}: Product) => void;
 };
 
 export function DueDate() {
@@ -36,18 +35,28 @@ export function DueDate() {
   const token = getToken();
 
   function calDate(date: Date) {
-    const dateF =  new Date(formatDate(date.toString()));
-    // const data10DiasFuturo = addDays(dateCurrent, 10);
-    // const faltam10Dias = isBefore(data10DiasFuturo, data10DiasFuturo);
-    //  const diferencaEmMilissegundos = dateF.getTime() - dateCurrent.getTime();
+    const data1 = new Date(date);
+    const data2 = new Date();
 
-    // Converte a diferença para dias
-    // const diferencaEmDias = diferencaEmMilissegundos / (1000 * 60 * 60 * 24);
+    const diferencaEmMilissegundos = Math.abs(
+      data1.getTime() - data2.getTime()
+    );
 
-    // console.log(dateF)
+    const diferencaEmDias = Math.floor(
+      diferencaEmMilissegundos / (1000 * 60 * 60 * 24)
+    );
 
-    // Verifica se faltam 10 dias ou menos para o evento
-    // return diferencaEmDias <= 10;
+    console.log(`A diferença em dias é: ${diferencaEmDias}`);
+
+    if (data1 < data2) {
+      console.log("A data 1 é anterior à data 2.");
+      return 0;
+    }
+
+    if (diferencaEmDias == 0) {
+      return 0;
+    }
+    return diferencaEmDias;
   }
 
   async function getProducts() {
@@ -60,7 +69,6 @@ export function DueDate() {
       .then((response) => {
         setProducts(response.data.products);
         setIsCarreg(true);
-      
       })
       .catch((error) => {
         console.error(error);
@@ -78,7 +86,7 @@ export function DueDate() {
   if (isCarreg) {
     return (
       <SafeAreaView style={styles.body}>
-                <View style={styles.appBar}>
+        <View style={styles.appBar}>
           <TouchableOpacity onPress={prevPage}>
             <MaterialIcons
               name="arrow-back-ios"
@@ -87,23 +95,32 @@ export function DueDate() {
               style={{ marginLeft: 20 }}
             />
           </TouchableOpacity>
-
-         
-
         </View>
-        <View style={styles.circleValue}>
-          <Text style={styles.circleValueText}>
-            15
-          </Text>
-        </View>
+        {/* <View style={styles.circleValue}>
+          <Text style={styles.circleValueText}>15</Text>
+        </View> */}
 
         <View style={styles.subtitleRow}>
-          <Text style={styles.subtitle}>Validades</Text>
+          <Text style={styles.subtitle}>Vencimentos</Text>
+        </View>
+
+        <View style={styles.legendas}>
+          <View style={styles.legenda}>
+            <View style={styles.circle} />
+            <Text style={styles.legendaText}>Longe do vencimento</Text>
+          </View>
+          <View style={styles.legenda}>
+            <View style={styles.circle3} />
+            <Text style={styles.legendaText}>10 dias para o vencimento</Text>
+          </View>
+          <View style={styles.legenda}>
+            <View style={styles.circle2} />
+            <Text style={styles.legendaText}>Vencido</Text>
+          </View>
         </View>
 
         {products.length == 0 ? (
-          <View
-          >
+          <View>
             <Text style={{ fontSize: 22 }}>Nenhum Produto Cadastrado</Text>
           </View>
         ) : (
@@ -114,19 +131,23 @@ export function DueDate() {
           data={products}
           style={{ width: "90%" }}
           renderItem={({ item, index }) => (
-            <TouchableOpacity
-              style={styles.products}
-              onPress={() => {}}
-            >
+            <TouchableOpacity style={styles.products} onPress={() => {}}>
               <View style={styles.productsRow}>
                 <View style={styles.productsRowLeft}>
-                  <View style={styles.circle} />
+                  <View
+                    style={
+                      calDate(item.dueDate) > 10
+                        ? styles.circle
+                        : calDate(item.dueDate) == 0
+                        ? styles.circle2
+                        : styles.circle3
+                    }
+                  />
                   <Text style={styles.productsName}>{item.name}</Text>
                 </View>
                 <View>
                   <Text style={styles.productsName}>
                     {formatDate(item.dueDate.toString())}
-                  
                   </Text>
                 </View>
               </View>

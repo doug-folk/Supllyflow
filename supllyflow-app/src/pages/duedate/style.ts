@@ -13,14 +13,15 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   subtitleRow: {
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     flexDirection: "row",
     width: "90%",
     marginBottom: 30,
+    marginTop: 20
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: "bold",
   },
   circleValue: {
@@ -64,6 +65,12 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.ALERT,
     borderRadius: 25,
   },
+  circle3: {
+    width: 15,
+    height: 15,
+    backgroundColor: "#ffff00",
+    borderRadius: 25,
+  },
   appBar: {
     backgroundColor: THEME.COLORS.PRIMARY,
     paddingTop: 5,
@@ -105,5 +112,22 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%"
+  },
+  legendas: {
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    width: "100%",
+    marginLeft: 40,
+    marginBottom: 60,
+    gap: 10
+  },
+  legenda: {
+    flexDirection: "row",
+    gap: 5,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  legendaText: {
+    fontSize: 16
   }
 });
