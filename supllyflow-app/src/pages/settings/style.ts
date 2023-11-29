@@ -44,4 +44,9 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "700"
     },
+     load: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
 });

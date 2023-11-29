@@ -24,12 +24,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   stocks: {
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 10,
     marginTop: 30,
     backgroundColor: "#D9D9D9",
     padding: 10,
     paddingVertical: 20,
+    paddingBottom: 40,
     borderRadius: 20,
   },
   cardStock: {
@@ -37,9 +38,24 @@ export const styles = StyleSheet.create({
     height: 160,
     backgroundColor: THEME.COLORS.GREEN,
   },
+  titleProduct: {
+    color: "#474B55",
+    fontSize: 26,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10, 
+  },
+  titleWork: {
+    color: "#474B55",
+    fontSize: 26,
+    fontWeight: "bold",
+    // textAlign: "center",
+    // marginBottom: 10, 
+    marginLeft: 30
+  },
   titleCardStock: {
     color: "#474B55",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 10,
@@ -81,10 +97,13 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   elemento2: {
-    padding: 20,
+    padding: 23,
     position: "absolute",
     top: 10,
-    left: 8,
+    // left: 8,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center"
   },
   chartTitle: {
     color: "#fff",

@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { UserModel } from "../models/UserModel";
 import { sign } from "jsonwebtoken";
 import { UserRepository } from "../repositories/UserRepository";
+import { getToken } from "../utils/token";
 export class UserController {
   async index(req: Request, res: Response) {
     const users = await prisma.user.findMany();
@@ -30,5 +31,20 @@ export class UserController {
       email: result.email,
       token,
     });
+  }
+
+  async getProfileUser(req: Request, res: Response) {
+        try {
+            const userId = getToken(req, res);
+
+            const user = await UserRepository.getProfileUser(userId);
+
+            return res.json({ user });
+
+        } catch (error) {
+
+            console.error("Erro ao listar fornecedor:", error);
+            return res.status(404).json("Erro ao listar fornecedor:");
+        }
   }
 }

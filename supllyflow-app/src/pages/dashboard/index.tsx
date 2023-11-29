@@ -111,7 +111,12 @@ export function Dashboard() {
 
           <View style={styles.body}>
             <View style={styles.stocks}>
-              <Card style={styles.cardStock}>
+              <Text style={styles.titleProduct}>Meus Produtos</Text>
+
+              <View style={{flexDirection: "row", gap:20, justifyContent: "center"}}>
+
+                  <TouchableOpacity  style={styles.cardStock}>
+                {/* <Card style={styles.cardStock}> */}
                 <Text style={styles.titleCardStock}>Estoque atual</Text>
 
                 <View style={styles.container}>
@@ -139,11 +144,11 @@ export function Dashboard() {
                   </View>
 
                   <View style={styles.elemento2}>
-                    <Text style={styles.chartTitle}>produtos</Text>
                     <Text style={styles.chartProduct}>{sumStockCurrent()}</Text>
                   </View>
                 </View>
-              </Card>
+                  {/* </Card>a */}
+                  </TouchableOpacity>
               <Card style={styles.cardStock}>
                 <Text style={styles.titleCardStock}>Estoque mínimo</Text>
 
@@ -172,7 +177,6 @@ export function Dashboard() {
                   </View>
 
                   <View style={styles.elemento2}>
-                    <Text style={styles.chartTitle}>produtos</Text>
                     <Text style={styles.chartProduct}>{sumStockMin()}</Text>
                   </View>
                 </View>
@@ -209,14 +213,17 @@ export function Dashboard() {
                   </View>
 
                   <View style={styles.elemento2}>
-                    <Text style={styles.chartTitle}>produtos</Text>
                     <Text style={styles.chartProduct}>{sumStockMax()}</Text>
                   </View>
                 </View>
               </Card>
+
+              </View>
             </View>
 
             <View style={styles.shortcuts}>
+                <Text style={styles.titleWork}>Workflow</Text>
+
               <View style={styles.shortcutsDiv}>
                 <TouchableOpacity
                   style={styles.cardShortcut}

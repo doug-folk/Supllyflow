@@ -19,7 +19,7 @@ import { Supplier } from "../../../utils/interfaces/supplier";
 import { useAuth } from "../../../contexts/AuthContext";
 import RNPickerSelect from "react-native-picker-select";
 import { Snackbar } from "react-native-paper";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { doubleString, formatDate } from "../../../utils/functions/format";
 
 type Navigation = {
@@ -49,7 +49,6 @@ export function UpdateProduct() {
   const [date, setDate] = useState<Date>(new Date());
   const [showPicker, setShowPicker] = useState<boolean>(false);
 
-
   const placeholder = {
     label: "Selecione o fornecedor",
     value: paramsData.supplierId,
@@ -66,10 +65,9 @@ export function UpdateProduct() {
       })
       .then((response) => {
         setSuppliers(response.data.suppliers);
-        setDate(paramsData.dueDate)
+        setDate(new Date(paramsData.dueDate))
         setSelectedValue(paramsData.supplierId)
         setMoneyValue(doubleString(paramsData.amount))
-        console.log(suppliers);
       })
       .catch((error) => {
         console.error(error);
@@ -80,7 +78,7 @@ export function UpdateProduct() {
     navigation.goBack();
   }
 
-  const onChange = (event: Event, selectedDate?: Date) => {
+  const onChangeDate = (event: DateTimePickerEvent, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowPicker(Platform.OS === "ios");
     setDate(currentDate);
@@ -309,7 +307,7 @@ export function UpdateProduct() {
             mode="date"
             is24Hour={true}
             display="default"
-            onChange={onChange}
+            onChange={onChangeDate}
           />
         )}
 

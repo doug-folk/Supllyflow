@@ -97,7 +97,8 @@ export function Products() {
                 </View>
                 <View>
                   <Text style={styles.productsName}>
-                    R$ {doubleString(item.amount * parseInt(item.stockCurrent))}
+                    {/* R$ {doubleString(item.amount * parseInt(item.stockCurrent))} */}
+                    {item.stockCurrent} Unidades
                   </Text>
                 </View>
               </View>
