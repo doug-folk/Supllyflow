@@ -17,6 +17,7 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.post("/user", userController.createUser);
+router.get("/user", AuthMiddleware, userController.getProfileUser);
 router.post("/auth", authController.authenticate);
 
 router.post("/supplier", AuthMiddleware, supplierController.create);

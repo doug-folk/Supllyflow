@@ -25,4 +25,12 @@ export class UserRepository {
             },
         });
     }
+
+    
+    static async getProfileUser(idUser: string) {
+        const user = await prisma.user.findMany({
+            where: {id: idUser},
+         });
+        return user;
+    }
 }

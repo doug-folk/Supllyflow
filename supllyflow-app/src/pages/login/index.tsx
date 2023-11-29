@@ -49,7 +49,8 @@ export function Login() {
       .then((response) => {
         console.log(response.data);
         saveToken(response.data.token);
-        navigation.navigate("bottomNavigationBar" as never);
+        
+        navigation.reset({index: 0,routes: [{ name: 'bottomNavigationBar' as never }]})
       })
       .catch((error) => {
         setPasswordIncorrect(true);
